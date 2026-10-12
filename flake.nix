@@ -36,7 +36,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Nixdatifier — NixOS generations/flake-updates tray, Quickshell panel for Hyprland.
+    # Nixdatifier — NixOS generations/flake-updates tray, standalone app (window + tray icon).
     nixdatifier = {
       url = "github:Muddyblack/nixdatifier";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,9 +56,9 @@
           (final: prev: {
             github-copilot-cli = copilot-cli-flake.packages.${system}.default;
             nix-graph = nix-graph.packages.${system}.nix-graph;
-            # Self-contained wrapper (tray icon + Quickshell popup/pill), run via
-            # exec-once in hyprland-laptop.nix.
-            nixdatifier-hyprland = nixdatifier.packages.${system}.hyprland;
+            # Standalone app (window + tray icon), run via exec-once/spawn-at-startup
+            # in hyprland-laptop.nix/niri-laptop.nix; tray icon shows in DankBar's systray.
+            nixdatifier-standalone = nixdatifier.packages.${system}.nixdatifier;
           })
         ];
       };
